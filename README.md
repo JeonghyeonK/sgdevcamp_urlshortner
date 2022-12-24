@@ -1,3 +1,6 @@
+12/25 1차 완료했습니다.
+
+
 # 2022WinterDevCampPersonalProject - URL Shortener
 
 <br>
