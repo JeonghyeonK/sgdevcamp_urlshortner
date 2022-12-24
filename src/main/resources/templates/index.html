@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div style="text-align:center;">
+        <img src="img/logo.png" style="display: inline-block; margin-bottom:100px; margin-top:50px;" alt="오류">
+
+        <div id="inputDiv" style="margin-bottom:50px;">
+            <input type="text" id="originUrl" name="originUrl" placeholder="url" size="100">
+            <input value="convert" type="button" onclick="getResult()">
+        </div>
+
+        <div id="result">
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function getResult() {
+        var data = { originUrl: $("#originUrl").val() }
+
+        $.ajax({
+            url: "/api/shorten",
+            data: JSON.stringify(data),
+            type:"POST",
+            contentType: 'application/json; charset=utf-8',
+            dataType: "text"
+        }).done(function(data) {
+            let response = "<p>shorten url: <a href=" + data +" target='_blank'>" + data +"</a></p>";
+            $("#result").empty();
+            $("#result").append(response);
+        }).fail(function() {
+            let response = "<p>URL만 입력할 수 있습니다.</p>";
+            $("#result").empty();
+            $("#result").append(response);
+        })
+    }
+</script>
+</html>
